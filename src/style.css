@@ -1,23 +1,129 @@
-*
-{
+@import url('https://fonts.googleapis.com/css2?family=Aboreto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap');
+
+* {
     margin: 0;
     padding: 0;
 }
 
 html,
-body
-{
-    overflow: hidden;
+body {
+    overflow-x: hidden;
 }
 
-.webgl
-{
-    position: fixed;
+body {
+    background-color: #242424;
+}
+
+h1, h2, .extand {
+    font-family: 'Aboreto', cursive;
+    background-color: #85FFBD;
+    background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+p, h4 {
+    font-family: 'Baloo 2', cursive;
+    color: #dedede;
+    font-size: 24px;
+    line-height: 26px;
+    font-weight: 400;
+}
+
+.webgl {
+    position: relative;
     top: 0;
     left: 0;
     outline: none;
+    z-index: -5;
 }
 
 .colorPicker {
-    color: #444444;
+    color: #30787a;
+}
+
+.overlayRenderer {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.overlayRenderer .__position {
+    width: 40%;
+    margin-left: auto;
+    margin-right: 50px;
+}
+.overlayRenderer .__extra .icon {
+    display: flex;
+    position: relative;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    width: -moz-fit-content;
+}
+.overlayRenderer .__extra .icon::before {
+    position: absolute;
+    content: '';
+    transform: scale(1);
+    bottom: -5px;
+    left: 0; right: 0;
+    width: 100%;
+    height: 4px;
+    border-radius: 8px;
+    background-color: #85FFBD;
+}
+
+section {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.about main {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 20px 10px;
+}
+
+.about #cards {
+    width: 50%;
+}
+
+
+.card {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.card .__front {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 50%;
+    justify-content: start;
+}
+
+.card .__back {
+    display: flex;
+    align-items: center;
+}
+
+.card .img {
+    width: 50%;
+    height: 100%;
+    background-color: green;
+    border-radius: 4px;
 }
