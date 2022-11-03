@@ -22,6 +22,14 @@ h1, h2, .extand {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+h1 {
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 32px;
+}
 p, h4 {
     font-family: 'Baloo 2', cursive;
     color: #dedede;
@@ -79,11 +87,12 @@ p, h4 {
 }
 
 section {
-    height: 80vh;
+    height: 40vh;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    font-size: 32px;
 }
 
 .about main {
@@ -96,34 +105,76 @@ section {
 }
 
 .about #cards {
-    width: 50%;
+    width: 80%;
+    height: inherit;
+    display: flex;
 }
 
+#picture {
+    width: 30%;
+    height: 4*50px;
+    overflow: hidden;
+    position: relative;
+}
 
-.card {
+#card {
+    width: 70%;
+}
+
+#cards .__back, #cards .__front {
+    display: flex;
+    height: 50px;
+    object-fit: cover;
+}
+#cards .__back:hover, #cards .__front:hover {
+    cursor: pointer;
+}
+
+#cards .__front {
     width: 100%;
-    height: 40px;
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 0;
 }
 
-.card .__front {
+#cards .__front.img {
     display: flex;
-    align-items: center;
-    gap: 20px;
-    width: 50%;
-    justify-content: start;
+    position: absolute;
+    z-index: 5;
+    transition: height .2s cubic-bezier(0.65, 0.05, 0.36, 1);
 }
 
-.card .__back {
+#cards .__front.img.__full {
+    position: absolute;
     display: flex;
-    align-items: center;
-}
-
-.card .img {
-    width: 50%;
+    top: 0;
+    z-index: 10;
     height: 100%;
-    background-color: green;
-    border-radius: 4px;
+}
+
+#cards .__back {
+    width: 100%;
+    margin: 0 20px;
+}
+
+#cards .__text {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card_stack {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card_stack .__desc {
+    width: 40%;
+}
+
+.card_stack .__icons {
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
 }

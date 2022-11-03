@@ -50,20 +50,18 @@ async function loadGltf() {
         console.log("gltf load")
         gltfELement = gltf.scene
         gltfAnimation(gltfELement)
-    }
+        position = gltfELement.position.y
+        }
     )
 }
 
-const clock = new THREE.Clock()
-const speed = 2
-let delta = 0
-const slowMode = 15
+let position
 
 function gltfAnimation(element) {
-    if(element) 
-        delta = clock.getDelta()
-        gltfELement.position.y += speed * delta / slowMode * Math.sign(Math.sin(Date.now() * 0.001))
-        requestAnimationFrame(gltfAnimation)
+    if(element, position) {
+        gltfELement.position.y = position + Math.sin(Date.now() * 0.001)/4
+    } 
+    window.requestAnimationFrame(gltfAnimation)
 }
 
 /**
