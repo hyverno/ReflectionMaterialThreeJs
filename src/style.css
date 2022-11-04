@@ -113,7 +113,7 @@ section {
 #picture {
     width: 30%;
     height: 4*50px;
-    overflow: hidden;
+    /* overflow: hidden; */
     position: relative;
 }
 
@@ -138,7 +138,8 @@ section {
     display: flex;
     position: absolute;
     z-index: 5;
-    transition: height .2s cubic-bezier(0.65, 0.05, 0.36, 1);
+    transition: height .2s cubic-bezier(0.65, 0.05, 0.36, 1),
+                margin .2s cubic-bezier(0.65, 0.05, 0.36, 1);
 }
 
 #cards .__front.img.__full {

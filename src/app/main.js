@@ -4,21 +4,23 @@ const parent_cards = document.getElementById('cards')
 const all_projects = [
   {
     picture: "./picture/amh.webp",
+    link: "https://allo-maitre-dho.fr/",
     desc: "Allo Maître d’Ho",
     date: "11 June 2022"
   },
   {
-    picture: "https://google.com",
+    picture: "http://sthd.clepopiplay.com/",
+    link: "http://sthd.clepopiplay.com/",
     desc: "unicityCoin",
     date: "11 June 2022"
   },
   {
-    picture: "https://google.com",
+    picture: "./picture/amh.webp",
     desc: "test",
     date: "11 June 2022"
   },
   {
-    picture: "https://google.com",
+    picture: "./picture/amh.webp",
     desc: "test",
     date: "11 June 2022"
   },
@@ -72,11 +74,15 @@ function load() {
   let index = 0
   const a = document.querySelectorAll(`.__front.img`)
     a.forEach((e) => {
+      const i = index
       e.addEventListener('mouseenter', function (event) {
         event.target.classList.add('__full')
+        event.target.style.marginTop = (event.target.style.marginTop.split('px')[0])-50*i +"px"
+        console.log(i)
       })
       e.addEventListener('mouseleave', function (event) {
         event.target.classList.remove('__full')
+        event.target.style.marginTop = (event.target.style.marginTop.split('px')[0])+50*i +"px"
       })
       e.style.marginTop += 50*index +"px"
       index++
