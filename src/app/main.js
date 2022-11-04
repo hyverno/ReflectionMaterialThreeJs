@@ -22,7 +22,7 @@ const all_projects = [
   {
     picture: "./picture/amh.webp",
     desc: "test",
-    date: "11 June 2021"
+    date: "11 June 2022"
   },
 ]
 
