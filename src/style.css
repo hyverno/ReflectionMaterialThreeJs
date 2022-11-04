@@ -43,7 +43,7 @@ p, h4 {
     top: 0;
     left: 0;
     outline: none;
-    z-index: -5;
+    z-index: 5;
 }
 
 .colorPicker {
@@ -55,7 +55,7 @@ p, h4 {
     width: 100vw;
     height: 100vh;
     z-index: 5;
-    display: flex;
+    display: none; /* === === === switch === === === */
     align-items: center;
     justify-content: center;
 }
