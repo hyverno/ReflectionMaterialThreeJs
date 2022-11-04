@@ -1,0 +1,3 @@
+{
+  "buildCommand": "webpack --config ./bundler/webpack.prod.js"
+}
