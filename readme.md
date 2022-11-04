@@ -1,16 +1,10 @@
-# Three.js Journey
+# Hyverno - portfolio
 
-## Setup
-Download [Node.js](https://nodejs.org/en/download/).
-Run this followed commands:
+## Presentation
+Hi, I am a frontend developer specializing in creative design. I'm passionate about 3D rendering, script optimization and the JV world in general.
 
-``` bash
-# Install dependencies (only the first time)
-npm install
+I mainly use VueJs and Angular. This allows me to deploy applications easily and quickly. For my backend I mainly use Firebase, which allowed me to get familiar with HTTPS requests and CRUD in general. In order to create immersive experiences I sometimes integrate ThreeJs.
 
-# Run the local server at localhost:8080
-npm run dev
+## Stack
 
-# Build for production in the dist/ directory
-npm run build
-```
+`Vue` `Angular` `ThreeJs` `Firebase`
