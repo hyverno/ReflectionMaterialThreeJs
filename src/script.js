@@ -77,7 +77,6 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
 const controls = new OrbitControls(camera, renderer.domElement)
-console.log(controls)
 
 function tick() {
     renderer.render( scene, camera );
