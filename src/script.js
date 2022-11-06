@@ -23,76 +23,6 @@ import { DotScreenShader } from 'three/examples/jsm/shaders/DotScreenShader.js';
 
 const canvas = document.querySelector('canvas.webgl')
 
-const gltfLoader = new GLTFLoader()
-// THREE.MeshStandardMaterial
-const gltfMaterial = new THREE.MeshBasicMaterial ({
-    color: '#30787a',
-    emissive: '#ffffff',
-    metalness: 0.2,
-})
-
-let gltfELement = null ||undefined
-
-async function loadGltf() {
-    gltfLoader.load(
-        '/models/icon.gltf',
-    (gltf) => {
-        gltf.scene.scale.set(1, 1, 1)
-        
-        gltf.scene.traverse((child) => {
-            if (child) {
-                child.material = gltfMaterial
-            }
-        })
-        gltf.scene.material = gltfMaterial
-        scene.add(gltf.scene)
-        gltf.scene.position.y += 1.5
-        gltf.scene.position.x -= 1.5
-        console.log("gltf load")
-        gltfELement = gltf.scene
-        gltfAnimation(gltfELement)
-        position = gltfELement.position.y
-        }
-    )
-}
-
-let position
-
-function gltfAnimation(element) {
-    if(element, position) {
-        gltfELement.position.y = position + Math.sin(Date.now() * 0.001)/4
-    } 
-    window.requestAnimationFrame(gltfAnimation)
-}
-
-/**
- * Floor
- */
-
-const textureLoader = new THREE.TextureLoader()
-
-const roughnessMap = textureLoader.load('./models/textures/BatteredMetal01_2K_Roughness.png')
-const normalMap = textureLoader.load('./models/textures/BatteredMetal01_2K_Normal.png')
-
-const floor = new THREE.PlaneGeometry(10, 10)
-const floor_mat = new THREE.MeshStandardMaterial({
-    color: '#242424',
-    metalness: 0.5,
-    roughness: 1,
-    roughnessMap: roughnessMap,
-    normalMap: normalMap,
-})
-
-floor.material = floor_mat
-
-const floor_mesh = new THREE.Mesh(floor, floor_mat)
-floor_mesh.receiveShadow = true
-floor_mesh.rotation.x = - Math.PI * 0.5
-scene.add(floor_mesh)
-
-/**
- * Lights
- */
 const ambientLight = new THREE.AmbientLight('#4a4a4a', 1)
 scene.add(ambientLight)
 
@@ -108,9 +38,6 @@ spotLight.shadow.camera.far = 1500;
 spotLight.shadow.camera.fov = 40;
 spotLight.shadow.bias = - 0.005;
 
-/**
- * Sizes
- */
 const sizes = {
     width: window.innerWidth,
     height: window.innerHeight
@@ -130,24 +57,13 @@ window.addEventListener('resize', () => {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
-/**
- * Camera
- */
-// Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
         // L - R // U - D // F - B //
-camera.position.set(-1.8, 0.5, 3)
+camera.position.set(0, 0, 5)
 scene.add(camera)
-camera.lookAt(floor)
 
-// Controls
-const controls = new OrbitControls(camera, canvas)
-controls.target.set(0, 0.75, 0)
-controls.enableDamping = true
 
-/**
- * Renderer
- */
+
 const renderer = new THREE.WebGLRenderer({
     canvas: canvas,
     powerPreference: "high-performance",
@@ -160,62 +76,56 @@ renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-const bloomPass = new UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight),
-    0.4,
-    0.4,
-    0,
-)
+const controls = new OrbitControls(camera, renderer.domElement)
 
-
-const renderScene = new RenderPass(scene, camera)
-const composer = new EffectComposer(renderer)
-composer.addPass(renderScene)
-
-
-
-const ssrPass = new SSRPass( {
-    renderer,
-    scene,
-    camera,
-    width: innerWidth,
-    height: innerHeight,
-    // groundReflector: 
-} )
-
-ssrPass.opacity = 1
-ssrPass.maxDistance = 1.2
-ssrPass.InfiniteThick = true
-
-composer.addPass(ssrPass)
-composer.addPass(bloomPass)
-
-const effect2 = new ShaderPass( RGBShiftShader );
-effect2.uniforms[ 'amount' ].value = 0.0025;
-composer.addPass( effect2 );
-
-function findElementWithTagsComponent(tags) {
-    scene.traverse((e) => {
-        console.log(e)
-    }) 
-}
-
-
-findElementWithTagsComponent('test')
-
-function animation() {
-
-}
-
-const tick = () => {
-    controls.update()
-    composer.render()
-
-    animation()
-
+function tick() {
+    renderer.render( scene, camera );
     window.requestAnimationFrame(tick)
 }
-
-loadGltf()
-
+controls.update()
 tick()
+
+
+function fragmentShader() {
+    return `
+    uniform vec3 colorA; 
+    uniform vec3 colorB; 
+    varying vec3 vUv;
+
+    void main() {
+        gl_FragColor = vec4(mix(colorA, colorB, vUv.z), 1.0);
+    }
+`
+}
+
+function vertexShader() {
+    return `
+    varying vec3 vUv; 
+
+    void main() {
+        vUv = position; 
+    
+        vec4 modelViewPosition = modelViewMatrix * vec4(position, 1.0);
+        gl_Position = projectionMatrix * modelViewPosition; 
+    }
+    `
+}
+
+function addExperimentalCube() {
+    let uniforms = {
+            colorB: {type: 'vec3', value: new THREE.Color(0xACB6E5)},
+            colorA: {type: 'vec3', value: new THREE.Color(0x74ebd5)}
+    }
+    let geometry = new THREE.SphereGeometry(1, 10, 10)
+    let material =  new THREE.ShaderMaterial({
+        uniforms: uniforms,
+        fragmentShader: fragmentShader(),
+        vertexShader: vertexShader(),
+        wireframe: true
+    })
+    let mesh = new THREE.Mesh(geometry, material)
+    mesh.position.x = 2
+    scene.add(mesh)
+}
+
+addExperimentalCube()
