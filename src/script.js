@@ -5,21 +5,9 @@ import './style.css'
 import './app/main.js'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 // custom module
 import { scene } from './app/scene'
-import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper.js';
 
-import {RenderPass} from 'three/examples/jsm/postprocessing/RenderPass'
-import {EffectComposer} from 'three/examples/jsm/postprocessing/EffectComposer'
-import {UnrealBloomPass} from 'three/examples/jsm/postprocessing/UnrealBloomPass'
-import {Reflector} from 'three/examples/jsm/objects/Reflector.js'
-
-import {SSRPass} from 'three/examples/jsm/postprocessing/SSRPass.js'
-import {ReflectorForSSRPass} from 'three/examples/jsm/objects/ReflectorForSSRPass'
-import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass.js';
-import { RGBShiftShader } from 'three/examples/jsm/shaders/RGBShiftShader.js';
-import { DotScreenShader } from 'three/examples/jsm/shaders/DotScreenShader.js';
 
 const canvas = document.querySelector('canvas.webgl')
 
@@ -117,6 +105,7 @@ function addExperimentalCube() {
             colorA: {type: 'vec3', value: new THREE.Color(0x74ebd5)}
     }
     let geometry = new THREE.SphereGeometry(1, 10, 10)
+    let a = new THREE.BufferGeometry()
     let material =  new THREE.ShaderMaterial({
         uniforms: uniforms,
         fragmentShader: fragmentShader(),

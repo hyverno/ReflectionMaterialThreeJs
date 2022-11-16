@@ -31,10 +31,8 @@ const all_projects = [
 ];
 
 const projet = `
-<div id="picture">
-</div>
-<div id="card">
-</div>
+  <div id="picture"></div>
+  <div id="card"></div>
 `;
 document.querySelector("#cards").innerHTML += projet;
 
@@ -48,10 +46,10 @@ function card_template(picture, desc, date, alt) {
   `;
   const card = `
   <div class="__back">
-  <div class="__text">    
-  <p>${desc}</p>
-  <p>Create at ${date}</p>
-  </div>
+    <div class="__text">    
+      <p>${desc}</p>
+      <p>Create at ${date}</p>
+    </div>
   </div>
   `;
   const i = id;
@@ -77,20 +75,39 @@ addEventListener("load", () => {
 
 function load() {
   let index = 0;
-  const a = document.querySelectorAll(`.__front.img`);
-  a.forEach((e) => {
-    const i = index;
-    e.addEventListener("mouseenter", function (event) {
-      event.target.classList.add("__full");
-      event.target.style.marginTop =
-      event.target.style.marginTop.split("px")[0] - 50 * i + "px";
+  let index2 = 0;
+  document.querySelectorAll(`.__front.img`)
+    .forEach((e) => {
+      const i = index;
+      e.classList.add(`id_${i}`);
+      e.addEventListener("mouseenter", function (event) {
+        event.target.classList.add("__full");
+        event.target.style.marginTop =
+        event.target.style.marginTop.split("px")[0] - 50 * i + "px";
+      });
+      e.addEventListener("mouseleave", function (event) {
+        event.target.classList.remove("__full");
+        event.target.style.marginTop =
+        event.target.style.marginTop.split("px")[0] + 50 * i + "px";
+      });
+      e.style.marginTop += 50 * index + "px";
+      index++
     });
-    e.addEventListener("mouseleave", function (event) {
-      event.target.classList.remove("__full");
-      event.target.style.marginTop =
-      event.target.style.marginTop.split("px")[0] + 50 * i + "px";
-    });
-    e.style.marginTop += 50 * index + "px";
-    index++;
-  });
+  document.querySelectorAll('.__back')
+    .forEach((e) => {
+      const id = index2
+      e.addEventListener("mouseenter", () => {
+        const element = document.querySelector(`.id_${id}`)
+        element.classList.add("__full");        
+        element.style.marginTop =
+        element.style.marginTop.split("px")[0] - 50 * id + "px";
+      })
+      e.addEventListener("mouseleave", () => {
+        const element = document.querySelector(`.id_${id}`)
+        element.classList.add("__full");        
+        element.style.marginTop =
+        element.style.marginTop.split("px")[0] + 50 * i + "px";
+      })
+      index2++
+    })
 }
