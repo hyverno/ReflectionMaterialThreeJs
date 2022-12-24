@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Red Hat Display', sans-serif;
+}
+
+body {
+    background-color: #242424;
+}
+
+header {
+    background-color: #111111;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+h2, p, h3 {
+    color: #fff;
+}
+
+.__title {
+    font-size: 3rem;
+    background-color: #85FFBD;
+    font-weight: 800;
+    background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.__subtitle {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+section {
+    min-height: 60vh;
+    padding: 20px 0;
+    background: #242424;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.projects {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card {
+    background-color: #111111;
+    color: #fff;
+    padding: 20px;
+    margin: 1rem;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.over {
+    transition: 0.5s;
+    border: 1px solid #111111;
+}
+
+.over:hover {
+    border: 1px solid #85FFBD;
+    transition: 0.5s;
+}
+
+.card .img {
+    width: 400px;
+    height: 200px;
+    border-radius: 10px;
+    background-color: #6f706f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    object-fit: cover;
+}
+
+.__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.card .txt {
+    width: 100%;
+}
+
+.skills {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.skills .skill {
+    width: 10%;
+    gap: 20px;
+    padding: 10px 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #111111;
+}
+
+.skills .skill p {
+    width: 60%;
+    text-align: start;
+}
+
+.skills .skill svg.three * {
+    fill: #fff;
+}
+
+form {
+    width: 80%;
+    gap: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+form .__ext {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    gap: 80px;
+}
+
+input, textarea {
+    background: #111111;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    padding: 20px;
+    width: calc(100% - 40px);
+    margin-bottom: 1rem;
+}
+
+textarea {
+    min-height: 100%;
+    max-height: fit-content;
+}
+
+
+textarea::-webkit-scrollbar {
+    width: 10px;
+}
+
+textarea::-webkit-scrollbar-track {
+    background: #111111;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background: #6f706f;
+    border-radius: 10px;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+    background: whitesmoke;
+}
+
+.btn {
+    background: #111111;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    padding: 20px;
+    width: 100%;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+    .skills {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .skills .skill {
+        width: 80%;
+    }
+    form .__ext {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
